@@ -2,7 +2,7 @@ from time import sleep
 from metodos_selenium import write, click
 from login_prefeitura import login_prefeitura
 
-def process_prefeitura(im:str, mes:str, ano:str, numero_nota:str):
+def preencher_dados(im:str, mes:str, ano:str, numero_nota:str):
 
     try:
 
@@ -33,6 +33,24 @@ def process_prefeitura(im:str, mes:str, ano:str, numero_nota:str):
         sleep(5)
 
         driver.quit()
+
+    except Exception as e:
+
+        raise e
+    
+def get_pdf(im:str):
+
+    try:
+
+        driver = login_prefeitura()
+
+        driver.get('https://sispmjp.joaopessoa.pb.gov.br:8080/sispmjp/paginas/ds/DS_GerenciarContribuinte.jsf')
+
+        write('//*[@id="form:contribuintesVinculados:j_idt64:filter"]', im, driver)
+
+        click('//*[@id="form:contribuintesVinculados:0:commandButton_representarContribuinte"]/span[1]', driver)
+
+        sleep(3)
 
     except Exception as e:
 
