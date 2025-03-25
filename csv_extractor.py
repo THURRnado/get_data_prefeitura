@@ -10,7 +10,8 @@ def csv_reader(csv:str):
 
         with open(csv, encoding='latin1') as f:
             for i, line in enumerate(f):
-                if "Dataemissão" in line:
+                linha_sem_espacos = line.replace(" ", "")
+                if "Dataemissão" in linha_sem_espacos:
                     header_line = i
                     break
 
